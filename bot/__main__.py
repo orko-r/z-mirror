@@ -73,7 +73,7 @@ def stats(update, context):
     f'<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>\n\n' \
     f'<b>SWAP In Use:</b> <code>{get_readable_file_size(swap.used)}</code> [{swap.percent}%]\n' \
     f'<b>Allocated</b> <code>{get_readable_file_size(swap.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
-    f'<b><u>BANDWIDTH USAGE</u><b>\n' \
+    f'<b><u>BANDWIDTH USAGE</u></b>\n' \
     f'<b>U-BW:</b> <code>{sent}</code> | <b>D-BW:</b> <code>{recv}</code>\n'
     sendMessage(stats, context.bot, update.message)
 
