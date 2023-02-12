@@ -357,7 +357,7 @@ class MirrorLeechListener:
                     if self.logMessage:
                         if self.dmMessage:
                             msg += f'\n\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
-                        sendMessage(msg + fmsg self.bot, self.logMessage)
+                        sendMessage(msg + fmsg, self.bot, self.logMessage)
                     buttons = ButtonMaker()
                     buttons = extra_btns(buttons)
                     if self.message.chat.type != 'private':
