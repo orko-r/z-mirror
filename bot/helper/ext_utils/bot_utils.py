@@ -200,7 +200,7 @@ def get_readable_message():
                 globals()['PAGE_NO'] -= 1
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
             if config_dict['DM_MODE']:
-                msg += f"Hey <b><a href='https://t.me/{download.message.from_user.username}'>{download.source}</a>, Please wait!\n{download.status()}</b> Your Task [<a href='{download.message.link}'>{download.mode()}</a>]"
+                msg += f"<b>Task Owner:</b> <a href='https://t.me/{download.message.from_user.username}'>{download.source}</a> \n<b>Task Status:</b> {download.status()} \n<b>Task Mode:</b> <a href='{download.message.link}'>{download.mode()}</a> \n<b>File Name:</b> <code>{escape(str(download.name()))}</code>"
             else:
                 msg += f'\n<b>{download.status()}:</b> <code>{escape(str(download.name()))}</code>'
             if download.status() not in [MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_CONVERTING]:
