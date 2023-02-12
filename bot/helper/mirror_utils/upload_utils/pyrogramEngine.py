@@ -86,7 +86,7 @@ class TgUploader:
                     sleep(1)
                 except Exception as err:
                     if isinstance(err, RetryError):
-                        LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
+                        LOGGER.info(f"📎Total Attempts: {err.last_attempt.attempt_number}")
                     else:
                         LOGGER.error(f"{err}. Path: {up_path}")
                     continue
@@ -105,7 +105,7 @@ class TgUploader:
             self.__listener.onUploadError('Files Corrupted or unable to upload. Check logs!')
             return
         if config_dict['DUMP_CHAT']:
-            msg = f'<b>File Name</b>: <code>{escape(self.name)}</code>\n\n<b>#Leech_Completed</b>!\n<b>#cc</b>: {self.__listener.tag}\n<b>#User_id</b>: {self.__listener.message.from_user.id}'
+            msg = f'<b>📝 File Name:</b> <b>{escape(self.name)}</b>\n\n<b>👤 Task Owner:</b> {self.__listener.tag}\n<b>🧿 Owner ID:</b> {self.__listener.message.from_user.id}'
             self.__sent_msg.reply_text(text=msg, quote=True)
         LOGGER.info(f"Leech Completed: {self.name}")
         size = get_readable_file_size(self.__size)
@@ -113,14 +113,14 @@ class TgUploader:
 
     def __prepare_file(self, up_path, file_, dirpath):
         if self.__lprefix:
-            cap_mono = f"{self.__lprefix} <code>{file_}</code>"
+            cap_mono = f"{self.__lprefix} <b>{file_}</b>"
             self.__lprefix = sub('<.*?>', '', self.__lprefix)
             file_ = f"{self.__lprefix} {file_}"
             new_path = ospath.join(dirpath, file_)
             rename(up_path, new_path)
             up_path = new_path
         else:
-            cap_mono = f"<code>{file_}</code>"
+            cap_mono = f"<b>{file_}</b>"
         return up_path, cap_mono
 
     @retry(wait=wait_exponential(multiplier=2, min=4, max=8), stop=stop_after_attempt(3),
@@ -257,8 +257,8 @@ class TgUploader:
             if self.__listener.logMessage:
                 self.__sent_msg = app.copy_message(DUMP_CHAT, self.__listener.logMessage.chat.id, self.__listener.logMessage.message_id)
             else:
-                msg = self.__listener.message.text if self.__listener.isPrivate else f'<b><a href="{self.__listener.message.link}">Source</a></b>'
-                msg = f'{msg}\n\n<b>#cc</b>: {self.__listener.tag} (<code>{self.__listener.message.from_user.id}</code>)'
+                msg = self.__listener.message.text if self.__listener.isPrivate else f'<b><a href="{self.__listener.message.link}">📎 Source Link: </a></b>'
+                msg = f'{msg}\n\n<b>👤 Task Owner:</b> {self.__listener.tag} (<code>{self.__listener.message.from_user.id}</code>)'
                 self.__sent_msg = app.send_message(DUMP_CHAT, msg, disable_web_page_preview=True)
             if self.__listener.dmMessage:
                 self.__sent_DMmsg = copy(self.__listener.dmMessage)
@@ -267,7 +267,7 @@ class TgUploader:
         else:
             self.__sent_msg = app.get_messages(self.__listener.message.chat.id, self.__listener.uid)
         if (not IS_USER_SESSION and self.__listener.message.chat.type != 'private' and config_dict['DUMP_CHAT']) or not self.__listener.dmMessage:
-            self.__button = InlineKeyboardMarkup([[InlineKeyboardButton(text='Save Message', callback_data="save")]])
+            self.__button = InlineKeyboardMarkup([[InlineKeyboardButton(text='🔺 Save This Message 🔻', callback_data="save")]])
 
     def __get_input_media(self, subkey, key):
         rlist = []

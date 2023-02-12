@@ -311,7 +311,7 @@ class MirrorLeechListener:
             msg += f"\n<b>⏲️ Time Taken:</b> {get_readable_time(time() - self.message.date.timestamp())}"
             if typ != 0:
                 msg += f'\n<b>🛑 Corrupted Files:</b> {typ}'
-            msg += f"\n<b>🔺 Upload:</b> {self.mode}\n\n"
+            msg += f"\n<b>🔺 Task Type:</b> {self.mode}\n\n"
             if not files:
                 if self.dmMessage:
                     msg += '<b>⏩ Files has been sent in your DM. ⏪</b>'
@@ -324,7 +324,7 @@ class MirrorLeechListener:
                     sendMessage(msg, self.bot, self.message)
                 if self.logMessage:
                     if self.dmMessage:
-                        msg += f'\n\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
+                        msg += f'\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
                     sendMessage(msg, self.bot, self.logMessage)
             elif self.dmMessage and not config_dict['DUMP_CHAT']:
                 sendMessage(msg, self.bot, self.dmMessage)
@@ -338,13 +338,13 @@ class MirrorLeechListener:
                         msg += f'\n\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
                     sendMessage(msg, self.bot, self.logMessage)
             else:
-                fmsg = '\n\n<b><u>VIEW FILES IN DUMP</u></b>'
+                fmsg = '\n\n<b><u>VIEW FILES IN DUMP</u></b>\n'
                 for index, (link, name) in enumerate(files.items(), start=1):
                     fmsg += f"{index}. <a href='{link}'>{name}</a>\n"
                     if len(fmsg.encode() + msg.encode()) > 4000:
                         if self.logMessage:
                             if self.dmMessage:
-                                msg += f'\n\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
+                                msg += f'\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
                             sendMessage(msg + fmsg, self.bot, self.logMessage)
                         buttons = ButtonMaker()
                         buttons = extra_btns(buttons)
@@ -352,11 +352,11 @@ class MirrorLeechListener:
                             buttons.sbutton('🔺 Save This Message 🔻', 'save', 'footer')
                         sendMessage(msg + fmsg, self.bot, self.message, buttons.build_menu(2))
                         sleep(1)
-                        fmsg = '\n\n<b><u>VIEW FILES IN DUMP</u></b>'
+                        fmsg = '\n\n<b><u>VIEW FILES IN DUMP</u></b>\n'
                 if fmsg != '':
                     if self.logMessage:
                         if self.dmMessage:
-                            msg += f'\n\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
+                            msg += f'\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
                         sendMessage(msg + fmsg, self.bot, self.logMessage)
                     buttons = ButtonMaker()
                     buttons = extra_btns(buttons)
@@ -388,7 +388,7 @@ class MirrorLeechListener:
                 msg += f' |<b>SubFolders:</b> {folders}'
                 msg += f' |<b>Files:</b> {files}'
             msg += f'\n<b>⏲️ Time Taken:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-            msg += f"\n<b>🔺 Upload:</b> {self.mode}"
+            msg += f"\n<b>🔺 Task Type:</b> {self.mode}"
             buttons = ButtonMaker()
             if not config_dict['DISABLE_DRIVE_LINK']:
                 link = short_url(link)
