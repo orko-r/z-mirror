@@ -248,13 +248,8 @@ Check all available qualities options <a href="https://github.com/yt-dlp/yt-dlp#
         rmsg = f'''
 Send Leech Prefix. Timeout: 60 sec
 Examples:
-1. <code>{escape('<b>@MLTB_Official</b>')}</code> 
-This will give output of:
-<b>@MLTB_Official</b>  <code>69MB.bin</code>.
-
-2. <code>{escape('<code>@JMDKH_Team</code>')}</code> 
-This will give output of:
-<code>@JMDKH_Team</code> <code>69MB.bin</code>.
+1. @SalomiyaCloud
+2. @NexusPrimeServer
 
 Check all available formatting options <a href="https://core.telegram.org/bots/api#formatting-options">HERE</a>.
         '''
