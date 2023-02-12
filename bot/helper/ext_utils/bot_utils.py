@@ -221,7 +221,7 @@ def get_readable_message():
                 elif download.status() == MirrorStatus.STATUS_SPLITTING:
                     msg += f"\n<b>✂️ Splitted:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
                 msg += f"\n<b>⚡ Speed:</b> <code>{download.speed()}</code> \n<b>⏲️ Time Taken:</b> <code>{get_readable_time(time() - download.message.date.timestamp())}</code>"
-                msg += f" | <b>⏳ Remaining Time:</b> <code>{download.eta()}</code> \n<b>⛓️ Running Engine:</b> <code>{download.engine}</code>"
+                msg += f"\n<b>⏳ Remaining Time:</b> <code>{download.eta()}</code> \n<b>⛓️ Running Engine:</b> <code>{download.engine}</code>"
                 if not config_dict['DM_MODE']:
                     msg += f"\n<b>🧿 Task Mode:</b> <a href='{download.message.link}'>{download.mode()}</a> | <b>👤 Task Owner:</b> <a href='https://t.me/{download.message.from_user.username}'>{download.source}</a>"
                 if hasattr(download, 'seeders_num'):
@@ -272,7 +272,7 @@ def get_readable_message():
                 elif 'M' in spd:
                     up_speed += float(spd.split('M')[0]) * 1048576
         bmsg = f"<b>FREE:</b> <code>{get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}</code><b> | UPTIME:</b> <code>{get_readable_time(time() - botStartTime)}</code>"
-        bmsg += f"\n<b>DLs:</b> <code>{get_readable_file_size(dl_speed)}/s</code><b> | ULs:</b> <code>{get_readable_file_size(up_speed)}/s</code>"
+        bmsg += f"\n<b>T-DL SPEED:</b> <code>{get_readable_file_size(dl_speed)}/s</code><b> | T-UL SPEED:</b> <code>{get_readable_file_size(up_speed)}/s</code>"
         buttons = ButtonMaker()
         buttons.sbutton("⛔️ Check Me! ⛔️", str(THREE))
         button = buttons.build_menu(1)

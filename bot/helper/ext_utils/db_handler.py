@@ -18,7 +18,7 @@ class DbManger:
     def __connect(self):
         try:
             self.__conn = MongoClient(DATABASE_URL)
-            self.__db = self.__conn.z
+            self.__db = self.__conn.nexusbot
         except PyMongoError as e:
             LOGGER.error(f"Error in DB connection: {e}")
             self.__err = True

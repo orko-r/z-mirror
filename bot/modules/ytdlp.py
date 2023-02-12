@@ -175,7 +175,7 @@ Check all yt-dlp api options from this <a href='https://github.com/yt-dlp/yt-dlp
             raw_url = extract_link(link)
             exist = DbManger().check_download(raw_url)
             if exist:
-                _msg = f'<b>Download is already added by {exist["tag"]}</b>\n\nCheck the download status in @{exist["botname"]}\n\n<b>Link</b>: <code>{exist["_id"]}</code>'
+                _msg = f'<b>This Download is already added by {exist["tag"]}</b>\nCheck the download status with me @{exist["botname"]}\n<b>Task Link</b>: <code>{exist["_id"]}</code>'
                 delete_links(bot, message)
                 sendMessage(_msg, bot, message)
                 __run_multi()

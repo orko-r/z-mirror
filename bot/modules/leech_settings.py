@@ -29,9 +29,9 @@ def getleechinfo(from_user):
 
     buttons.sbutton("Close", f"leechset {user_id} close")
     button = buttons.build_menu(1)
-    text = f"<u>Leech Settings for <a href='tg://user?id={user_id}'>{name}</a></u>\n"\
-           f"Leech Type <b>{ltype}</b>\n"\
-           f"Custom Thumbnail <b>{thumbmsg}</b>"
+    text = f"<b><u>Leech Settings for <a href='tg://user?id={user_id}'>{name}</a></u></b>\n"\
+           f"Leech Type:<b> {ltype}</b>\n"\
+           f"Custom Thumbnail:<b> {thumbmsg}</b>"
     return text, button
 
 def editLeechType(message, query):
@@ -50,7 +50,7 @@ def setLeechType(update, context):
     data = query.data
     data = data.split()
     if user_id != int(data[1]):
-        query.answer(text="Not Yours!", show_alert=True)
+        query.answer(text="Not Yours! Get Lost.", show_alert=True)
     elif data[2] == "doc":
         if user_id in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(user_id)
