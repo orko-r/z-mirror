@@ -25,18 +25,18 @@ PAGE_NO = 1
 PAGES = 0
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading"
-    STATUS_DOWNLOADING = "Downloading"
-    STATUS_CLONING = "Cloning"
-    STATUS_QUEUEDL = "QueueDl"
-    STATUS_QUEUEUP = "QueueUl"
-    STATUS_PAUSED = "Paused"
-    STATUS_ARCHIVING = "Archiving"
-    STATUS_EXTRACTING = "Extracting"
-    STATUS_SPLITTING = "Spliting"
-    STATUS_CHECKING = "CheckUp"
-    STATUS_SEEDING = "Seeding"
-    STATUS_CONVERTING = "Converting"
+    STATUS_UPLOADING = "Uploading 📤"
+    STATUS_DOWNLOADING = "Downloading 📥"
+    STATUS_CLONING = "Cloning ♻️"
+    STATUS_QUEUEDL = "QueueDl 💤"
+    STATUS_QUEUEUP = "QueueUl 💤"
+    STATUS_PAUSED = "Paused ⛔️"
+    STATUS_ARCHIVING = "Archiving 🔐"
+    STATUS_EXTRACTING = "Extracting 📂"
+    STATUS_SPLITTING = "Spliting ✂️"
+    STATUS_CHECKING = "CheckUp 📝"
+    STATUS_SEEDING = "Seeding 🌧"
+    STATUS_CONVERTING = "Converting ↔️"
 
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -135,9 +135,9 @@ def progress_bar(percentage):
 
 def _get_readable_message_btns(msg, bmsg):
     buttons = ButtonMaker()
-    buttons.sbutton("PREV", "status pre")
+    buttons.sbutton("<< Previous", "status pre")
     buttons.sbutton(f"{PAGE_NO}/{PAGES}", str(THREE))
-    buttons.sbutton("NEXT", "status nex")
+    buttons.sbutton("Next >>", "status nex")
     button = buttons.build_menu(3)
     return msg + bmsg, button
 
@@ -161,13 +161,9 @@ def bot_sys_stats():
     return f"""
 SYSTEM STATISTICS
 
-Uptime : {currentTime}
-SSD-TOTAL: {disk_t}
-SSD-FREE: {disk_f}
-
-BANDWIDTH
 D-BW: {recv} | U-BW: {sent}
 
+Bot Uptime : {currentTime}
 Made By Nexus Prime Server
 """
 #CPU:  {progress_bar(cpuUsage)} {cpuUsage}%
@@ -196,7 +192,7 @@ def get_readable_message():
                 cQul += 1
             cQu = cQdl + cQul
         tasks = len(download_dict)
-        msg = f"<b>Tasks</b> ➜ <b>DL:</b> <code>{cDl}</code>  <b>UL:</b> <code>{cUl}</code>  <b>Queued:</b> <code>{cQu}</code>  <b>Total:</b> <code>{tasks}</code>\n<code>--------------------------------</code>\n"
+        msg = f"<b>Tasks</b> ➜ <b>DLs:</b> <code>{cDl}</code>  <b>ULs:</b> <code>{cUl}</code>  <b>Queued:</b> <code>{cQu}</code> \n<b>Total Running Tasks:</b> <code>{tasks}</code>\n<code>----------------------------</code>\n"
         if STATUS_LIMIT := config_dict['STATUS_LIMIT']:
             globals()['PAGES'] = ceil(tasks/STATUS_LIMIT)
             if PAGE_NO > PAGES and PAGES != 0:
@@ -248,7 +244,7 @@ def get_readable_message():
                 except:
                     pass
             if download.status() != MirrorStatus.STATUS_CONVERTING:
-                msg += f"\n🛑 <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+                msg += f"\n<b>❌ Cancel: </b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
             msg += "\n\n"
             if STATUS_LIMIT and index == STATUS_LIMIT:
                 break
