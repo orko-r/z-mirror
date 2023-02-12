@@ -27,7 +27,7 @@ PAGES = 0
 class MirrorStatus:
     STATUS_UPLOADING = "Uploading"
     STATUS_DOWNLOADING = "Downloading"
-    STATUS_CLONING = "Cloneing"
+    STATUS_CLONING = "Cloning"
     STATUS_QUEUEDL = "QueueDl"
     STATUS_QUEUEUP = "QueueUl"
     STATUS_PAUSED = "Paused"
@@ -159,19 +159,20 @@ def bot_sys_stats():
     sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
     cpuUsage = cpu_percent(interval=1)
     return f"""
-BOT SYSTEM STATS
+SYSTEM STATISTICS
 
-CPU:  {progress_bar(cpuUsage)} {cpuUsage}%
-RAM: {progress_bar(mem_p)} {mem_p}%
-DISK: {progress_bar(disk)} {disk}%
-T: {disk_t} | F: {disk_f}
+Uptime : {currentTime}
+SSD-TOTAL: {disk_t}
+SSD-FREE: {disk_f}
 
-Working For: {currentTime}
-T-DL: {recv} | T-UL: {sent}
+BANDWIDTH
+D-BW: {recv} | U-BW: {sent}
 
-Made with ❤️ by Dawn
+Made By Nexus Prime Server
 """
-
+#CPU:  {progress_bar(cpuUsage)} {cpuUsage}%
+#RAM: {progress_bar(mem_p)} {mem_p}%
+#DISK: {progress_bar(disk)} {disk}%
 #----Thanks for deleting my name ❤️ Appreciate it----#
 #----------Remove this line too, who cares----------#
 

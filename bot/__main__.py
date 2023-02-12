@@ -40,7 +40,7 @@ def progress_bar(percentage):
 
 def stats(update, context):
     if path.exists('.git'):
-        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cr \n<b>Version: </b> %cd'"], shell=True).decode()
+        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cr \n<b>Commit Date: </b> %cd'"], shell=True).decode()
     else:
         last_commit = 'No UPSTREAM_REPO'
     sysTime = get_readable_time(time() - boot_time())
@@ -57,37 +57,36 @@ def stats(update, context):
     swap = swap_memory()
     mem_p = memory.percent
     stats = f'<b><i><u>Bot Statistics</u></i></b>\n\n'\
-            f'<code>CPU  :{progress_bar(cpuUsage)} {cpuUsage}%</code>\n' \
-            f'<code>RAM  :{progress_bar(mem_p)} {mem_p}%</code>\n' \
-            f'<code>SWAP :{progress_bar(swap.percent)} {swap.percent}%</code>\n' \
-            f'<code>DISK :{progress_bar(disk)} {disk}%</code>\n\n' \
-            f'<b>Updated:</b> {last_commit}\n' \
-            f'<b>SYS Uptime:</b> <code>{sysTime}</code>\n' \
-            f'<b>BOT Uptime:</b> <code>{botTime}</code>\n\n' \
-            f'<b>CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n' \
-            f'<b>P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | <b>V-Core(s):</b> <code>{v_core}</code>\n' \
-            f'<b>Frequency:</b> <code>{cpu_freq(percpu=False).current} Mhz</code>\n\n' \
-            f'<b>RAM In Use:</b> <code>{get_readable_file_size(memory.used)}</code> [{mem_p}%]\n' \
-            f'<b>Total:</b> <code>{get_readable_file_size(memory.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
-            f'<b>SWAP In Use:</b> <code>{get_readable_file_size(swap.used)}</code> [{swap.percent}%]\n' \
-            f'<b>Allocated</b> <code>{get_readable_file_size(swap.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
-            f'<b>Drive In Use:</b> <code>{used}</code> [{disk}%]\n' \
-            f'<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>\n' \
-            f'<b>T-UL:</b> <code>{sent}</code> | <b>T-DL:</b> <code>{recv}</code>\n'
+    f'<b>CPU :</b> <code>{progress_bar(cpuUsage)} {cpuUsage}%</code>\n' \
+    f'<b>RAM :</b> <code>{progress_bar(mem_p)} {mem_p}%</code>\n' \
+    f'<b>SWAP:</b> <code>{progress_bar(swap.percent)} {swap.percent}%</code>\n' \
+    f'<b>SSD:</b> <code>{progress_bar(disk)} {disk}%</code>\n\n' \
+    f'<b>Repo Updated:</b> {last_commit}\n\n' \
+    f'<b>OS Uptime:</b> <code>{sysTime}</code>\n' \
+    f'<b>BOT Uptime:</b> <code>{botTime}</code>\n\n' \
+    f'<b>CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n' \
+    f'<b>P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | <b>V-Core(s):</b> <code>{v_core}</code>\n' \
+    f'<b>Frequency:</b> <code>{cpu_freq(percpu=False).current} Mhz</code>\n\n' \
+    f'<b>RAM In Use:</b> <code>{get_readable_file_size(memory.used)}</code> [{mem_p}%]\n' \
+    f'<b>Total:</b> <code>{get_readable_file_size(memory.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
+    f'<b>Drive In Use:</b> <code>{used}</code> [{disk}%]\n' \
+    f'<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>\n\n' \
+    f'<b>SWAP In Use:</b> <code>{get_readable_file_size(swap.used)}</code> [{swap.percent}%]\n' \
+    f'<b>Allocated</b> <code>{get_readable_file_size(swap.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
+    f'<b><u>BANDWIDTH USAGE</u><b>\n' \
+    f'<b>U-BW:</b> <code>{sent}</code> | <b>D-BW:</b> <code>{recv}</code>\n'
     sendMessage(stats, context.bot, update.message)
 
 def start(update, context):
     if config_dict['DM_MODE']:
-        start_string = 'Welcome | Z BOT is ready for you.\n' \
-                       'Thanks for starting me in DM.\n' \
-                       'Now I can send all of your files and links here.\n'
+        start_string = '🎯 Hello Buddies✌️.\n' \
+                       '🎯 Use me at @NexusPrimeServer 🚀.\n' \
+                       '🎯 Type /help to get a list of available commands.\n'
     else:
-        start_string = 'Hey, Welcome dear. \n' \
-                       'I can Mirror all your links To Google Drive! \n' \
-                       'Unfortunately you are not authorized!\n' \
-                       'Please deploy your own BOT!' \
-                       'Created With Love by @Z_Mirror . \n' \
-                       'Thank You!'
+        start_string = '🎯 Hello Buddies✌️.\n' \
+                       '🎯 Use me at @NexusPrimeServer 🚀.\n' \
+                       '🎯 Type /help to get a list of available commands.\n' \
+                       '🎯 You are Unauthorized to use me.\n'
     sendMessage(start_string, context.bot, update.message)
 
 def restart(update, context):
