@@ -40,7 +40,7 @@ def progress_bar(percentage):
 
 def stats(update, context):
     if path.exists('.git'):
-        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cr \n<b>Commit Date: </b> %cd'"], shell=True).decode()
+        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cr \n<b>📅 Commit Date: </b> %cd'"], shell=True).decode()
     else:
         last_commit = 'No UPSTREAM_REPO'
     sysTime = get_readable_time(time() - boot_time())
@@ -56,24 +56,24 @@ def stats(update, context):
     memory = virtual_memory()
     swap = swap_memory()
     mem_p = memory.percent
-    stats = f'<b><i><u>Bot Statistics</u></i></b>\n\n'\
-    f'<b>CPU :</b> <code>{progress_bar(cpuUsage)} {cpuUsage}%</code>\n' \
-    f'<b>RAM :</b> <code>{progress_bar(mem_p)} {mem_p}%</code>\n' \
-    f'<b>SWAP:</b> <code>{progress_bar(swap.percent)} {swap.percent}%</code>\n' \
-    f'<b>SSD:</b> <code>{progress_bar(disk)} {disk}%</code>\n\n' \
-    f'<b>Repo Updated:</b> {last_commit}\n\n' \
-    f'<b>OS Uptime:</b> <code>{sysTime}</code>\n' \
-    f'<b>BOT Uptime:</b> <code>{botTime}</code>\n\n' \
-    f'<b>CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n' \
+    stats = f'<b><u>🌐 BOT STATISTICS 🌐</u>/b>\n\n'\
+    f'<b>🖥️ CPU :</b> <code>{progress_bar(cpuUsage)} {cpuUsage}%</code>\n' \
+    f'<b>🎮 RAM :</b> <code>{progress_bar(mem_p)} {mem_p}%</code>\n' \
+    f'<b>💾 SSD:</b> <code>{progress_bar(disk)} {disk}%</code>\n' \
+    f'<b>💣 SWAP:</b> <code>{progress_bar(swap.percent)} {swap.percent}%</code>\n\n' \
+    f'<b>🛠 Repo Updated:</b> {last_commit}\n\n' \
+    f'<b>🟢 OS Uptime:</b> <code>{sysTime}</code>\n' \
+    f'<b>⌛ BOT Uptime:</b> <code>{botTime}</code>\n\n' \
+    f'<b>🖥️ CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n' \
     f'<b>P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | <b>V-Core(s):</b> <code>{v_core}</code>\n' \
-    f'<b>Frequency:</b> <code>{cpu_freq(percpu=False).current} Mhz</code>\n\n' \
-    f'<b>RAM In Use:</b> <code>{get_readable_file_size(memory.used)}</code> [{mem_p}%]\n' \
+    f'<b>🤖 Frequency:</b> <code>{cpu_freq(percpu=False).current} Mhz</code>\n\n' \
+    f'<b>🎮 RAM In Use:</b> <code>{get_readable_file_size(memory.used)}</code> [{mem_p}%]\n' \
     f'<b>Total:</b> <code>{get_readable_file_size(memory.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
-    f'<b>Drive In Use:</b> <code>{used}</code> [{disk}%]\n' \
+    f'<b>💾 SSD In Use:</b> <code>{used}</code> [{disk}%]\n' \
     f'<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>\n\n' \
-    f'<b>SWAP In Use:</b> <code>{get_readable_file_size(swap.used)}</code> [{swap.percent}%]\n' \
+    f'<b>💣 SWAP In Use:</b> <code>{get_readable_file_size(swap.used)}</code> [{swap.percent}%]\n' \
     f'<b>Allocated</b> <code>{get_readable_file_size(swap.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
-    f'<b><u>BANDWIDTH USAGE</u></b>\n' \
+    f'<b><u>🔺 BANDWIDTH USAGE 🔻</u></b>\n' \
     f'<b>U-BW:</b> <code>{sent}</code> | <b>D-BW:</b> <code>{recv}</code>\n'
     sendMessage(stats, context.bot, update.message)
 
