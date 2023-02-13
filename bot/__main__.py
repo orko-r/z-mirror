@@ -69,7 +69,8 @@ def stats(update, context):
     f'<b>┕ Frequency:</b> <code>{cpu_freq(percpu=False).current} Mhz</code>\n\n' \
     f'<b>┍ 🎮 RAM In Use:</b> <code>{get_readable_file_size(memory.used)}</code> [{mem_p}%]\n' \
     f'<b>┕ Total:</b> <code>{get_readable_file_size(memory.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
-    f'<b>┍ 💾 SSD In Use:</b> <code>{used}</code> [{disk}%]\n' \
+    f'<b>┍ 💾 SSD In Use:</b> <
+     code>{used}</code> [{disk}%]\n' \
     f'<b>┕ Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>\n\n' \
     f'<b>┍ 💣 SWAP In Use:</b> <code>{get_readable_file_size(swap.used)}</code> [{swap.percent}%]\n' \
     f'<b>┕ Total:</b> <code>{get_readable_file_size(swap.total)}</code> | <b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
