@@ -234,8 +234,12 @@ def get_readable_message():
                 msg += f"\n<b>Speed</b>: <code>{download.speed()}</code> | <b>Elapsed:</b> <code>{get_readable_time(time() - download.startTime)}</code>"
                 msg += f"\n<b>ETA</b>: <code>{download.eta()}</code> | <b>Eng</b>: <code>{download.engine}</code>"
                 if not config_dict['DM_MODE']:
+<<<<<<< HEAD
                     msg += f"\n<b>Task</b>: <a href='{download.message.link}'>{download.mode()}</a> | <b>By</b>: {download.source}"
 >>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
+=======
+                    msg += f"\n<b>Task</b>: <a href='{download.message.link}'>{download.mode}</a> | <b>By</b>: {download.source}"
+>>>>>>> upstream/main
                 if hasattr(download, 'seeders_num'):
                     try:
                         msg += f"\n<b>🌱 Seeders:</b> {download.seeders_num()} | <b>🐌 Leechers:</b> {download.leechers_num()}"
