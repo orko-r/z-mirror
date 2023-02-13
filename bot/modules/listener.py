@@ -65,6 +65,7 @@ class MirrorLeechListener:
         self.logMessage = logMessage
         self.queuedUp = False
         self.sameDir = sameDir
+        self.startTime = time()
         self.__setMode()
 
     def clean(self):
@@ -304,6 +305,7 @@ class MirrorLeechListener:
             if self.dmMessage:
                 msg = f'<b>👤 Hey {self.tag}</b>,\n<b>Your Task is Completed Successfully. ✅</b>'
             else:
+<<<<<<< HEAD
                 msg = f'<b>📝 File Name:</b> <code>{escape(name)}</code>'
                 msg += f'\n<b>👤 Task Owner:</b> {self.tag}'
             msg += f'\n<b>📦 File Size:</b> {size}'
@@ -315,11 +317,25 @@ class MirrorLeechListener:
             if not files:
                 if self.dmMessage:
                     msg += '<b>⏩ Files has been sent in your DM. ⏪</b>'
+=======
+                msg = f'<b>File Name</b>: <code>{escape(name)}</code>'
+                msg += f'\n\n<b>#cc</b>: {self.tag}'
+            msg += f'\n\n<b>Size</b>: {size}'
+            msg += f'\n<b>Total Files</b>: {folders}'
+            msg += f"\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
+            if typ != 0:
+                msg += f'\n<b>Corrupted Files</b>: {typ}'
+            msg += f"\n<b>Upload</b>: {self.mode}\n\n"
+            msg_ = '<b>Files has been sent in your DM.</b>'
+            if not files:
+                if self.dmMessage:
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
                     buttons = ButtonMaker()
                     buttons.buildbutton("🔺 View in DM 🔻", f"{bot.link}")
                     button = buttons.build_menu(1)
-                    sendMessage(msg, self.bot, self.message, button)
+                    sendMessage(msg + msg_, self.bot, self.message, button)
                 else:
+<<<<<<< HEAD
                     msg += '<b>⏩ Files has been sent in Dump. ⏪</b>'
                     sendMessage(msg, self.bot, self.message)
                 if self.logMessage:
@@ -329,13 +345,27 @@ class MirrorLeechListener:
             elif self.dmMessage and not config_dict['DUMP_CHAT']:
                 sendMessage(msg, self.bot, self.dmMessage)
                 msg += '<b>⏩ Files has been sent in your DM. ⏪</b>'
+=======
+                    msg__ = '<b>Files has been sent in Leech Dump.</b>'
+                    sendMessage(msg + msg__, self.bot, self.message)
+                if self.logMessage:
+                    if self.dmMessage:
+                        msg += f'<b>File Name</b>: <code>{escape(name)}</code>'
+                    sendMessage(msg, self.bot, self.logMessage)
+            elif self.dmMessage and not config_dict['DUMP_CHAT']:
+                sendMessage(msg, self.bot, self.dmMessage)
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
                 buttons = ButtonMaker()
                 buttons.buildbutton("🔺 View in DM 🔻", f"{bot.link}")
                 button = buttons.build_menu(1)
-                sendMessage(msg, self.bot, self.message, button)
+                sendMessage(msg + msg_, self.bot, self.message, button)
                 if self.logMessage:
                     if self.dmMessage:
+<<<<<<< HEAD
                         msg += f'\n\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
+=======
+                        msg += f'<b>File Name</b>: <code>{escape(name)}</code>'
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
                     sendMessage(msg, self.bot, self.logMessage)
             else:
                 fmsg = '\n\n<b><u>VIEW FILES IN DUMP</u></b>\n'
@@ -344,7 +374,11 @@ class MirrorLeechListener:
                     if len(fmsg.encode() + msg.encode()) > 4000:
                         if self.logMessage:
                             if self.dmMessage:
+<<<<<<< HEAD
                                 msg += f'\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
+=======
+                                msg += f'<b>File Name</b>: <code>{escape(name)}</code>'
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
                             sendMessage(msg + fmsg, self.bot, self.logMessage)
                         buttons = ButtonMaker()
                         buttons = extra_btns(buttons)
@@ -354,8 +388,11 @@ class MirrorLeechListener:
                         sleep(1)
                         fmsg = '\n\n<b><u>VIEW FILES IN DUMP</u></b>\n'
                 if fmsg != '':
+                    if self.dmMessage:
+                        _msg_ = f'\n<b>Files has been sent in your DM.</b>'
                     if self.logMessage:
                         if self.dmMessage:
+<<<<<<< HEAD
                             msg += f'\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
                         sendMessage(msg + fmsg, self.bot, self.logMessage)
                     buttons = ButtonMaker()
@@ -363,6 +400,15 @@ class MirrorLeechListener:
                     if self.message.chat.type != 'private':
                         buttons.sbutton('🔺 Save This Message 🔻', 'save', 'footer')
                     sendMessage(msg + fmsg, self.bot, self.message, buttons.build_menu(2))
+=======
+                            __msg = f'<b>File Name</b>: <code>{escape(name)}</code>\n'
+                        sendMessage(msg + __msg + fmsg, self.bot, self.logMessage)
+                    buttons = ButtonMaker()
+                    buttons = extra_btns(buttons)
+                    if self.message.chat.type != 'private':
+                        buttons.sbutton('Save This Message', 'save', 'footer')
+                    sendMessage(msg + fmsg + _msg_, self.bot, self.message, buttons.build_menu(2))
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
             if self.seed:
                 if self.newDir:
                     clean_target(self.newDir)
@@ -408,11 +454,15 @@ class MirrorLeechListener:
             buttons = extra_btns(buttons)
             if self.dmMessage:
                 sendMessage(msg, self.bot, self.dmMessage, buttons.build_menu(2))
+<<<<<<< HEAD
                 msg += '\n\n<b>⏩ Links has been sent in your DM. ⏪</b>'
+=======
+                _msg = '\n\n<b>Links has been sent in your DM.</b>'
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
                 buttons = ButtonMaker()
                 buttons.buildbutton("🔺 View in DM 🔻", f"{bot.link}")
                 button = buttons.build_menu(1)
-                sendMessage(msg, self.bot, self.message, button)
+                sendMessage(msg + _msg, self.bot, self.message, button)
             else:
                 if self.message.chat.type != 'private':
                     buttons.sbutton("🔺 Save This Message 🔻", 'save', 'footer')
@@ -437,12 +487,20 @@ class MirrorLeechListener:
 
     def onDownloadError(self, error, button=None):
         error = error.replace('<', ' ').replace('>', ' ')
+<<<<<<< HEAD
         msg = f"<b>Hey</b> {self.tag},<b>\nYour download has been stopped!.\n Reason:</b> {error}\n<b>Time Taken:</b> {get_readable_time(time() - self.message.date.timestamp())}"
+=======
+        msg = f"{self.tag} your download has been stopped due to: {error}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
         self._clean_update(msg, button)
 
     def onUploadError(self, error):
         e_str = error.replace('<', '').replace('>', '')
+<<<<<<< HEAD
         msg = f"<b>Hey</b> {self.tag} {e_str},\n<b>Remaining Time:</b> {get_readable_time(time() - self.message.date.timestamp())}"
+=======
+        msg = f"{self.tag} {e_str}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
+>>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
         self._clean_update(msg)
 
     def _clean_update(self, msg=None, button=None):
