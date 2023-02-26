@@ -376,8 +376,11 @@ class MirrorLeechListener:
                 if fmsg != '':
                     if self.dmMessage:
                         _msg_ = f'\n<b>Files has been sent in your DM.</b>'
+                    else:
+                        _msg_ = f''
                     if self.logMessage:
                         if self.dmMessage:
+<<<<<<< HEAD
 <<<<<<< HEAD
                             msg += f'\n<b>📝 File Name:</b> <code>{escape(name)}</code>'
                         sendMessage(msg + fmsg, self.bot, self.logMessage)
@@ -388,6 +391,11 @@ class MirrorLeechListener:
                     sendMessage(msg + fmsg, self.bot, self.message, buttons.build_menu(2))
 =======
                             __msg = f'<b>File Name</b>: <code>{escape(name)}</code>\n'
+=======
+                            __msg = f'<b>File Name</b>: <code>{escape(name)}</code>\n\n'
+                        else:
+                            __msg = f''
+>>>>>>> upstream/main
                         sendMessage(msg + __msg + fmsg, self.bot, self.logMessage)
                     buttons = ButtonMaker()
                     buttons = extra_btns(buttons)

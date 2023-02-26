@@ -11,7 +11,7 @@ from bot.helper.ext_utils.fs_utils import (check_storage_threshold,
                                            clean_unwanted, get_base_name)
 from bot.helper.mirror_utils.status_utils.aria_download_status import AriaDownloadStatus
 from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
-from bot.helper.telegram_helper.message_utils import (deleteMessage,
+from bot.helper.telegram_helper.message_utils import (deleteMessage, delete_links,
                                                       sendMessage,
                                                       sendStatusMessage,
                                                       update_all_messages)
@@ -58,6 +58,7 @@ def __onDownloadStarted(api, gid):
                     if sname:
                         smsg, button = GoogleDriveHelper().drive_list(sname, True)
                         if smsg:
+                            delete_links(listener.bot, listener.message)
                             listener.onDownloadError('File/Folder already available in Drive.\nHere are the search results:\n', button)
                             api.remove([download], force=True, files=True, clean=True)
                             return
@@ -103,6 +104,7 @@ def __onDownloadStarted(api, gid):
                 if size > limit:
                     limit_exceeded = f'Leech limit is {get_readable_file_size(limit)}'
             if limit_exceeded:
+                delete_links(listener.bot, listener.message)
                 listener.onDownloadError(f'{limit_exceeded}.\nYour File/Folder size is {get_readable_file_size(size)}')
                 api.remove([download], force=True, files=True, clean=True)
                 return
@@ -213,15 +215,15 @@ def start_listener():
                                   on_bt_download_complete=__onBtDownloadComplete,
                                   timeout=60)
 
-def add_aria2c_download(link: str, path, listener, filename, auth, ratio, seed_time):
-    args = {'dir': path, 'max-upload-limit': '1K', 'netrc-path': '/usr/src/app/.netrc'}
+def add_aria2c_download(link: str, dpath, listener, filename, auth, ratio, seed_time):
+    args = {'dir': dpath, 'max-upload-limit': '1K', 'netrc-path': '/usr/src/app/.netrc'}
     a2c_opt = {**aria2_options}
     [a2c_opt.pop(k) for k in aria2c_global if k in aria2_options]
     args.update(a2c_opt)
     if filename:
         args['out'] = filename
     if auth:
-        args['header'] = f"authorization: {auth}"
+        args['header'] = auth
     if ratio:
         args['seed-ratio'] = ratio
     if seed_time:
