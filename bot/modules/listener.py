@@ -80,15 +80,15 @@ class MirrorLeechListener:
 
     def __setMode(self):
         if self.isLeech:
-            mode = 'Leech'
+            mode = 'Leech 📦'
         elif self.isClone:
-            mode = 'Clone'
+            mode = 'Clone ♻️'
         else:
-            mode = 'Drive'
+            mode = 'Drive 🌧'
         if self.isZip:
-            mode += ' as Zip'
+            mode += ' as Zip 🔐'
         elif self.extract:
-            mode += ' as Unzip'
+            mode += ' as Unzip 📂'
         self.mode = mode
 
 
@@ -232,7 +232,7 @@ class MirrorLeechListener:
                                 checked = True
                                 with download_dict_lock:
                                     download_dict[self.uid] = SplitStatus(up_name, size, gid, self)
-                                LOGGER.info(f"✂️ Splitting: {up_name}")
+                                LOGGER.info(f"Splitting: {up_name}")
                             res = split_file(f_path, f_size, file_, dirpath, LEECH_SPLIT_SIZE, self)
                             if not res:
                                 return
@@ -303,21 +303,8 @@ class MirrorLeechListener:
             DbManger().rm_complete_task(self.message.link)
         if self.isLeech:
             if self.dmMessage:
-                msg = f'<b>👤 Hey {self.tag}</b>,\n<b>Your Task is Completed Successfully. ✅</b>'
+                msg = f'<b>👤 Hey {self.tag}</b>,\n<b>✅Your Task is Completed Successfully.</b>'
             else:
-<<<<<<< HEAD
-                msg = f'<b>📝 File Name:</b> <code>{escape(name)}</code>'
-                msg += f'\n<b>👤 Task Owner:</b> {self.tag}'
-            msg += f'\n<b>📦 File Size:</b> {size}'
-            msg += f'\n<b>🧿 Total Files:</b> {folders}'
-            msg += f"\n<b>⏲️ Time Taken:</b> {get_readable_time(time() - self.message.date.timestamp())}"
-            if typ != 0:
-                msg += f'\n<b>🛑 Corrupted Files:</b> {typ}'
-            msg += f"\n<b>🔺 Task Type:</b> {self.mode}\n\n"
-            if not files:
-                if self.dmMessage:
-                    msg += '<b>⏩ Files has been sent in your DM. ⏪</b>'
-=======
                 msg = f'<b>File Name</b>: <code>{escape(name)}</code>'
                 msg += f'\n\n<b>#cc</b>: {self.tag}'
             msg += f'\n\n<b>Size</b>: {size}'
@@ -329,7 +316,6 @@ class MirrorLeechListener:
             msg_ = '<b>Files has been sent in your DM.</b>'
             if not files:
                 if self.dmMessage:
->>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
                     buttons = ButtonMaker()
                     buttons.buildbutton("🔺 View in DM 🔻", f"{bot.link}")
                     button = buttons.build_menu(1)
