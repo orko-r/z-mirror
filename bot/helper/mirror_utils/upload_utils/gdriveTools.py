@@ -188,13 +188,13 @@ class GoogleDriveHelper:
         msg = ''
         try:
             self.__service.files().delete(fileId=file_id, supportsAllDrives=True).execute()
-            msg = "Successfully deleted"
+            msg = "Successfully deleted ♻️"
             LOGGER.info(f"Delete Result: {msg}")
         except HttpError as err:
             if "File not found" in str(err):
-                msg = "No such file exist"
+                msg = "No such file exist ⚔️"
             elif "insufficientFilePermissions" in str(err):
-                msg = "Insufficient File Permissions"
+                msg = "Insufficient File Permissions ⚔️"
                 if token_service := self.__alt_authorize():
                     self.__service = token_service
                     return self.deletefile(link)
@@ -539,7 +539,7 @@ class GoogleDriveHelper:
                 else:
                     continue
             if not Title:
-                msg += f'<h4>Search Result For {fileName}</h4>'
+                msg += f'<h4>🌐 Search Result For {fileName} is:</h4>'
                 Title = True
             if drive_name:
                 msg += f"╾────────────╼<br><b>{drive_name}</b><br>╾────────────╼<br>"
@@ -602,12 +602,12 @@ class GoogleDriveHelper:
         if not telegraph_content:
             return "", None
 
-        path = [telegraph.create_page(title='Z Drive Search', content=content)["path"] for content in telegraph_content]
+        path = [telegraph.create_page(title='Nexus Drive Search', content=content)["path"] for content in telegraph_content]
 
         if len(path) > 1:
             telegraph.edit_telegraph(path, telegraph_content)
 
-        msg = f"<b>Found {contents_count} result for <i>{fileName}</i></b>"
+        msg = f"<b>🌐 Found {contents_count} result for <i>{fileName}</i></b> is:"
         buttons = ButtonMaker()
         buttons.buildbutton("🔎 VIEW", f"https://telegra.ph/{path[0]}", 'header')
         buttons = extra_btns(buttons)
@@ -628,19 +628,19 @@ class GoogleDriveHelper:
             mime_type = meta.get('mimeType')
             if mime_type == self.__G_DRIVE_DIR_MIME_TYPE:
                 self.__gDrive_directory(meta)
-                msg += f'<b>Name</b>: <code>{name}</code>'
-                msg += f'\n\n<b>Size</b>: {get_readable_file_size(self.__total_bytes)}'
-                msg += '\n\n<b>Type</b>: Folder'
-                msg += f' |<b>SubFolders</b>: {self.__total_folders}'
+                msg += f'<b>📄 Name</b>: <code>{name}</code>'
+                msg += f'\n\n<b>📦 Size</b>: {get_readable_file_size(self.__total_bytes)}'
+                msg += '\n\n<b>🧿 Type</b>: Folder'
+                msg += f' |<b>🧿 SubFolders</b>: {self.__total_folders}'
             else:
-                msg += f'<b>Name</b>: <code>{name}</code>'
+                msg += f'<b>📄 Name</b>: <code>{name}</code>'
                 if mime_type is None:
                     mime_type = 'File'
                 self.__total_files += 1
                 self.__gDrive_file(meta)
-                msg += f'\n<b>Size</b>: {get_readable_file_size(self.__total_bytes)}'
-                msg += f'\n\n<b>Type</b>: {mime_type}'
-            msg += f' |<b>Files</b>: {self.__total_files}'
+                msg += f'\n<b>📦 Size</b>: {get_readable_file_size(self.__total_bytes)}'
+                msg += f'\n\n<b>🧿 Type</b>: {mime_type}'
+            msg += f' |<b>🧿 Files</b>: {self.__total_files}'
         except Exception as err:
             if isinstance(err, RetryError):
                 LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
@@ -650,9 +650,9 @@ class GoogleDriveHelper:
                 if token_service := self.__alt_authorize():
                     self.__service = token_service
                     return self.count(link)
-                msg = "File not found."
+                msg = "File not found. ⚔️"
             else:
-                msg = f"Error.\n{err}"
+                msg = f"❌ Error.\n{err}"
         return msg
 
     def __gDrive_file(self, filee):
@@ -681,7 +681,7 @@ class GoogleDriveHelper:
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError, IndexError):
-            msg = "Google Drive ID could not be found in the provided link"
+            msg = "❌ Google Drive ID could not be found in the provided link"
             return msg, "", "", ""
         LOGGER.info(f"File ID: {file_id}")
         try:

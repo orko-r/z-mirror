@@ -6,6 +6,7 @@ from bot.helper.ext_utils.bot_utils import (MirrorStatus,
                                             get_readable_time)
 from bot.helper.ext_utils.fs_utils import get_path_size
 
+engine_ = f"7z 🛠"
 
 class ExtractStatus:
     def __init__(self, name, size, gid, listener):
@@ -19,7 +20,7 @@ class ExtractStatus:
         self.startTime = self.__listener.startTime
         self.mode = self.__listener.mode
         self.source = self.__source()
-        self.engine = '7z'
+        self.engine = engine_
 
     def gid(self):
         return self.__gid

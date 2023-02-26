@@ -86,7 +86,7 @@ class TgUploader:
                     sleep(1)
                 except Exception as err:
                     if isinstance(err, RetryError):
-                        LOGGER.info(f"📎Total Attempts: {err.last_attempt.attempt_number}")
+                        LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
                     else:
                         LOGGER.error(f"{err}. Path: {up_path}")
                     continue
@@ -105,7 +105,7 @@ class TgUploader:
             self.__listener.onUploadError('Files Corrupted or unable to upload. Check logs!')
             return
         if config_dict['DUMP_CHAT']:
-            msg = f'<b>📝 File Name:</b> <b>{escape(self.name)}</b>\n\n<b>👤 Task Owner:</b> {self.__listener.tag}\n<b>🧿 Owner ID:</b> {self.__listener.message.from_user.id}'
+            msg = f'<b>📝 File Name:</b> <b>{escape(self.name)}</b>\n\n<b>👤 Owner:</b> {self.__listener.tag}\n<b>🧿 ID:</b> {self.__listener.message.from_user.id}'
             self.__sent_msg.reply_text(text=msg, quote=True)
         LOGGER.info(f"Leech Completed: {self.name}")
         size = get_readable_file_size(self.__size)

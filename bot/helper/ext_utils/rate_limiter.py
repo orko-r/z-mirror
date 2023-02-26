@@ -44,19 +44,11 @@ def ratelimiter(func):
         is_limited = ratelimit.acquire(userid)
         if is_limited and userid not in warned_users:
             if query := update.callback_query:
-<<<<<<< HEAD
-                query.answer("🛑 Spam detected! ignoring your all requests for few minutes. 🛑", show_alert=True)
+                query.answer("🛑 Spam detected! ignoring your all requests for 30 seconds. 🛑", show_alert=True)
                 warned_users[userid] = 1
                 return
             elif message := update.message:
-                message.reply_text("🛑 Spam detected! ignoring your all requests for few minutes. 🛑")
-=======
-                query.answer("Spam detected! ignoring your all requests for 30 seconds.", show_alert=True)
-                warned_users[userid] = 1
-                return
-            elif message := update.message:
-                message.reply_text("Spam detected! ignoring your all requests for 30 seconds.")
->>>>>>> upstream/main
+                message.reply_text("🛑 Spam detected! ignoring your all requests for 30 seconds. 🛑")
                 warned_users[userid] = 1
                 return
             else:

@@ -1,6 +1,7 @@
 from bot import LOGGER
 from bot.helper.ext_utils.bot_utils import MirrorStatus, get_readable_file_size
 
+engine_ = f"Queue 💤"
 
 class QueueStatus:
     def __init__(self, name, size, gid, listener, state):
@@ -13,7 +14,7 @@ class QueueStatus:
         self.startTime = self.__listener.startTime
         self.mode = self.__listener.mode
         self.source = self.__source()
-        self.engine = "Queue System v1.0"
+        self.engine = engine_
 
     def gid(self):
         return self.__gid

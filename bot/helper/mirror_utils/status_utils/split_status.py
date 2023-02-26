@@ -3,6 +3,8 @@ from bot import DOWNLOAD_DIR, LOGGER
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, MirrorStatus, get_readable_time
 from bot.helper.ext_utils.fs_utils import get_path_size
 
+engine_ = f"FFmpeg🍿"
+
 class SplitStatus:
     def __init__(self, name, size, gid, listener):
         self.__name = name
@@ -15,7 +17,7 @@ class SplitStatus:
         self.startTime = self.__listener.startTime
         self.mode = self.__listener.mode
         self.source = self.__source()
-        self.engine = "ffmpeg"
+        self.engine = engine_
 
     def gid(self):
         return self.__gid

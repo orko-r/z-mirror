@@ -159,8 +159,7 @@ def bot_sys_stats():
     sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
     cpuUsage = cpu_percent(interval=1)
     return f"""
-SYSTEM STATISTICS
-
+CPU: {cpuUsage}%
 D-BW: {recv} | U-BW: {sent}
 
 Bot Uptime : {currentTime}
@@ -200,11 +199,7 @@ def get_readable_message():
                 globals()['PAGE_NO'] -= 1
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
             if config_dict['DM_MODE']:
-<<<<<<< HEAD
-                msg += f"<b>👤 Task Owner:</b> <a href='https://t.me/{download.message.from_user.username}'>{download.source}</a> \n<b>🔄 Task Process:</b> {download.status()} \n<b>🧿 Task Mode:</b> <a href='{download.message.link}'>{download.mode()}</a> \n<b>📝 File Name:</b> <code>{escape(str(download.name()))}</code>"
-=======
-                msg += f"Hey <b><i>@{download.message.from_user.username}</i></b>, Please wait!\n<b>{download.status()}</b> Your Task [<a href='{download.message.link}'>{download.mode}</a>]"
->>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
+                msg += f"<b>👤 Owner:</b> @{download.message.from_user.username} | <b>🧿 Mode:</b> <a href='{download.message.link}'>{download.mode}</a> \n <b>🔄 OnGoing Process:</b> {download.status()} \n<b>📝 File Name:</b> <code>{escape(str(download.name()))}</code>"
             else:
                 msg += f'\n<b>{download.status()}:</b> <code>{escape(str(download.name()))}</code>'
             if download.status() not in [MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_CONVERTING]:
@@ -223,23 +218,11 @@ def get_readable_message():
                 elif download.status() == MirrorStatus.STATUS_EXTRACTING:
                     msg += f"\n<b>📂 Extracted:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
                 elif download.status() == MirrorStatus.STATUS_SPLITTING:
-<<<<<<< HEAD
                     msg += f"\n<b>✂️ Splitted:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
-                msg += f"\n<b>⚡ Speed:</b> <code>{download.speed()}</code> \n<b>⏲️ Time Taken:</b> <code>{get_readable_time(time() - download.message.date.timestamp())}</code>"
-                msg += f"\n<b>⏳ Remaining Time:</b> <code>{download.eta()}</code> \n<b>⛓️ Running Engine:</b> <code>{download.engine}</code>"
+                msg += f"\n<b>⚡ Speed</b>: <code>{download.speed()}</code> | <b>⏲️ Time:</b> <code>{get_readable_time(time() - download.startTime)}</code>"
+                msg += f"\n<b>⏳ ETA:</b> <code>{download.eta()}</code> | <b>⛓️ Engine:</b> <code>{download.engine}</code>"
                 if not config_dict['DM_MODE']:
-                    msg += f"\n<b>🧿 Task Mode:</b> <a href='{download.message.link}'>{download.mode()}</a> | <b>👤 Task Owner:</b> <a href='https://t.me/{download.message.from_user.username}'>{download.source}</a>"
-=======
-                    msg += f"\n<b>Splitted:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
-                msg += f"\n<b>Speed</b>: <code>{download.speed()}</code> | <b>Elapsed:</b> <code>{get_readable_time(time() - download.startTime)}</code>"
-                msg += f"\n<b>ETA</b>: <code>{download.eta()}</code> | <b>Eng</b>: <code>{download.engine}</code>"
-                if not config_dict['DM_MODE']:
-<<<<<<< HEAD
-                    msg += f"\n<b>Task</b>: <a href='{download.message.link}'>{download.mode()}</a> | <b>By</b>: {download.source}"
->>>>>>> aa1df35a9811f9088c44ba271c9cffe978e63861
-=======
-                    msg += f"\n<b>Task</b>: <a href='{download.message.link}'>{download.mode}</a> | <b>By</b>: {download.source}"
->>>>>>> upstream/main
+                    msg += f"\n<b>🧿 Mode</b>: <a href='{download.message.link}'>{download.mode()}</a> | <b>👤 Owner</b>: <a href='https://t.me/{download.message.from_user.username}'>{download.source}</a>"
                 if hasattr(download, 'seeders_num'):
                     try:
                         msg += f"\n<b>🌱 Seeders:</b> {download.seeders_num()} | <b>🐌 Leechers:</b> {download.leechers_num()}"
